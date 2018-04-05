@@ -1,0 +1,58 @@
+@model IEnumerable<IssueManager.Models.IssueUser>
+
+@{
+    ViewData["Title"] = "";
+}
+
+<h2>Latest new issues</h2>
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>                
+            </th>   
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+    
+        <tr>
+        <td>
+            <div class="btn btn-default" style="width:100%;">
+                <table class="table" style="background:none;text-align:left; margin-bottom:5px;">
+                    <thead>
+                        <th>
+                            <a asp-action="GetIssue" asp-route-id="@item.Issue.IssueID">Get Issue!</a> 
+                            <h4>@Html.DisplayFor(modelItem => item.Issue.Created)</h4>
+                            
+                            
+                            @Html.DisplayFor(modelItem => item.Issue.IssueType.Name)
+                            <br>
+                            
+                             @Html.DisplayFor(modelItem => item.NameSurname)
+                        </th>
+                        
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Issue.Content)
+                            </td>
+                        </tr>
+                    </tbody>
+                    <tbody>
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Issue.Content)
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            </td>
+        </tr>
+    
+}
+    </tbody>
+</table>

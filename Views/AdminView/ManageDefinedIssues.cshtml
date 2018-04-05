@@ -1,0 +1,175 @@
+@model IssueManager.Models.UserView
+
+@{
+    ViewData["Title"] = "Defined issues";
+}
+
+<table class="table" style="width:100%;" id="conTable">
+    <thead>
+
+    </thead>
+    <tbody>
+        <tr>
+            <h3></h3>
+            <a asp-area="" asp-controller="AdminView" asp-action="ManageIssueTypes" style="font-size:20px;">Issue Types</a>
+             | 
+            <a asp-area="" asp-controller="AdminView" asp-action="ManageDefinedIssues" style="font-size:20px;">Defined Issues</a>
+            <h1></h1>
+        </tr>
+        <tr>
+            <td style="width: 45%;white-space: nowrap;overflow: hidden;">
+               
+                <table class="table" style="margin-top:20px;width:100%; border-radius:3px; background: LightGray  ;">
+                     
+                    <thead>
+                        <tr>
+                            <th>Frequently occurring issues</th>
+                        </tr>
+                    </thead>
+                    <tbody> 
+                        
+                        @foreach (var item in Model.Issues) {
+                            <tr>
+                                <td>
+                                <script>
+                                
+                                    function appendSolution(id) {
+                                        const display = document.getElementById(id).style.display;
+                                        if(display == 'none'){ 
+                                            document.getElementById(id).style.display='block';
+                                            
+                                        } else {
+                                            document.getElementById(id).style.display='none';
+                                        }
+                                    }
+                                    function editDefinedSolution(id) {
+                                        const display = document.getElementById(id).style.display;
+                                        const normal_id = id + " normal";
+                                        const edit_id = id + " edit";
+                                        document.getElementById(normal_id).style.display='none';
+                                        document.getElementById(edit_id).style.display='block';  
+                                    }
+
+                                    function closeEditDefinedSolution(id) {
+                                        const display = document.getElementById(id).style.display;
+                                        const normal_id = id + " normal";
+                                        const edit_id = id + " edit";
+                                        document.getElementById(edit_id).style.display='none';
+                                        document.getElementById(normal_id).style.display='block';  
+                                    }
+
+                                    function submitEdit(id) {
+                                        let form_id = id + " form-id";
+                                        
+                                        document.getElementById(form_id).submit(); 
+                                    }
+                                </script>
+                                <div id ="@item.IssueID normal" class="btn btn-default" style="width: 100%; text-align: left;" onclick="appendSolution(@Html.DisplayFor(modelItem => item.IssueID))">
+                                    <table class="table" style="background:none; margin:0px;" id="instab">
+                                        <thead>
+                                                <th style="width:90%;">
+                                                    @Html.DisplayFor(modelItem => item.Content)
+                                                </th>
+                                                <th style="text-align:center;">
+                                                    <a onclick="editDefinedSolution( @item.IssueID );">
+                                                        <i class="fas fa-pencil-alt" style="font-size:20px;"></i>
+                                                    </a> 
+                                                </th>
+                                                <th>
+                                                    <a asp-action="DeleteDefinedIssue" asp-route-id="@item.IssueID">
+                                                        <i style="font-size:20px;" class="fas fa-trash-alt"></i>
+                                                    </a> 
+                                                </th>
+                                        </thead>
+                                        <tbody style="display:none;" id="@Html.DisplayFor(modelItem => item.IssueID)">
+                                            <tr>
+                                                <td>
+                                                    <div style="width:100%;word-break: break-all; word-wrap: break-word;">
+                                                    @Html.DisplayFor(modelItem => item.Solution)
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div id ="@item.IssueID edit" class="btn btn-default" style="width: 100%; text-align: left;display:none;" onclick="appendSolution(@Html.DisplayFor(modelItem => item.IssueID))">
+                                    <table class="table" style="background: none; margin: 0px;" id="instab">                       
+                                        <tbody id="@Html.DisplayFor(modelItem => item.IssueID)">
+                                            <form action="EditDefinedIssue" id="@item.IssueID form-id">
+                                                <input type="hidden" asp-for="@item.IssueID"/>
+                                                <tr>
+                                                    <td> 
+                                                        <label asp-for="@item.Content" class="control-label"></label>
+                                                        @Html.TextArea("@item.Content", @item.Content, new { @class = "form-control", @style="width:100%;"})
+                                                        <span asp-validation-for="Content" class="text-danger"></span>                                                    
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <label asp-for="@item.Solution" class="control-label"></label>
+                                                        @Html.TextArea("@item.Solution", @item.Solution, new { @class = "form-control", @style="width:100%;"})
+                                                        <span asp-validation-for="Solution" class="text-danger"></span> 
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td style="width:80%;">
+                                                    </td>
+                                                    <td>
+                                                            <a onclick="submitEdit( @item.IssueID );">
+                                                                <i class="fas fa-check" style="font-size:20px;"></i>
+                                                            </a>
+                                                    </td>
+                                                    <td>
+                                                        <a onclick="closeEditDefinedSolution( @item.IssueID );">
+                                                                <i class="fas fa-times" style="font-size:20px;"></i>
+                                                        </a>
+                                                    </td> 
+                                                </tr>
+                                            </form>
+                                        </tbody>
+                                    </table>
+                                </div>
+
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </td>
+            <td style="width: 10%;">
+            </td>
+            <td style="width: 45%;">
+                <h1>New defined issue</h1>
+                <div class="row" style="width:100%">
+                    <div class="col-md-4" style="width:100%">
+                        <form asp-action="AdminCreateNewDefinedIssue">
+                            <div class="form-group">
+                                <label asp-for="IssueTypeID" class="control-label"></label>
+                                <select asp-for="IssueTypeID" class ="form-control" asp-items="ViewBag.IssueTypeID" style="width:50%;"></select>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="Content" class="control-label"></label>
+                                @Html.TextArea("Content", null, new { @class = "form-control"})  
+                                <span asp-validation-for="Content" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="Solution" class="control-label"></label>
+                                @Html.TextArea("Solution", null, new { @class = "form-control"})  
+                                <span asp-validation-for="Solution" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <input type="submit" value="Create" class="btn btn-default" />
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </td>
+            
+        </tr>
+               
+    </tbody>
+</table>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

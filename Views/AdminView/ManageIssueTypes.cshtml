@@ -1,0 +1,75 @@
+@model IssueManager.Models.AdminIssueTypeView
+
+@{
+    ViewData["Title"] = "Issue types";
+}
+
+<table class="table" style="width:100%;" id="conTable">
+    <thead>
+
+    </thead>
+    <tbody>
+        <tr>
+            <h3></h3>
+            <a asp-area="" asp-controller="AdminView" asp-action="ManageIssueTypes" style="font-size:20px;">Issue Types</a>
+             | 
+            <a asp-area="" asp-controller="AdminView" asp-action="ManageDefinedIssues" style="font-size:20px;">Defined Issues</a>
+            <h1></h1>
+        </tr>
+        <tr>
+            <td style="width: 35%;white-space: nowrap;overflow: hidden;">
+               
+                <table class="table" style="margin-top:20px;width:100%; border-radius:3px;   ;">
+                     
+                    <thead>
+                        <tr>
+                            <th>Current Issue Types</th>
+                        </tr>
+                    </thead>
+                    <tbody> 
+                        
+                        @foreach (var item in Model.IssueTypes) {
+                            <tr>
+                                <td style="width:90%;">
+                                    @Html.DisplayFor(modelItem => item.Name)
+                                </td>
+                                <td style="text-align: center;">
+                                    <a asp-action="DeleteIssueType" asp-route-id="@item.IssueTypeID">
+                                        <i style="font-size:20px;" class="fas fa-trash-alt"></i>
+                                    </a> 
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </td>
+            <td style="width: 15%;">
+
+            </td>
+            <td style="width: 50%;">
+                <h1>Create New Issue Type</h1><h1></h1>
+                
+                <div class="row" style="width:100%">
+                    <div class="col-md-4" style="width:100%">
+                        <form asp-action="CreateIssueType">
+                            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                            <div class="form-group">
+                                <input asp-for="Name" class="form-control" />
+                                <span asp-validation-for="Name" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <input type="submit" value="Create" class="btn btn-default" />
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </td>
+            
+        </tr>
+               
+    </tbody>
+</table>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

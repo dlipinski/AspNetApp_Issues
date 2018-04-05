@@ -1,0 +1,99 @@
+@model IssueManager.Models.UserView
+
+@{
+    ViewData["Title"] = "";
+}
+<h1>Welcome!</h1>
+@if (!string.IsNullOrEmpty(ViewBag.Message)) { 
+    <script type="text/javascript">
+        alert('<%=ViewBag.Message%>');
+    </script>
+ } 
+<table class="table" style="width:100%;" id="conTable">
+    <thead>
+
+    </thead>
+    <tbody>
+        <tr>
+            <td style="width: 45%;white-space: nowrap;overflow: hidden;">
+               
+                <table class="table" style="margin-top:20px;width:100%; border-radius:3px; background: LightGray  ;">
+                     
+                    <thead>
+                        <tr>
+                            <th>Frequently occurring issues</th>
+                        </tr>
+                    </thead>
+                    <tbody> 
+                        
+                        @foreach (var item in Model.Issues) {
+                            <tr>
+                                <td>
+                                <script>
+                                
+                                    function appendSolution(id) {
+                                        const display = document.getElementById(id).style.display;
+                                        if(display == 'none'){ 
+                                            document.getElementById(id).style.display='block';
+                                            
+                                        } else {
+                                            document.getElementById(id).style.display='none';
+                                        }
+                                    }
+                                </script>
+                                <div class="btn btn-default" style="width: 100%; text-align: left;" onclick="appendSolution(@Html.DisplayFor(modelItem => item.IssueID))">
+                                    <table class="table" style="background:none; margin:0px;" id="instab">
+                                        <thead>
+                                                @Html.DisplayFor(modelItem => item.Content)
+                                        </thead>
+                                        <tbody style="display:none;" id="@Html.DisplayFor(modelItem => item.IssueID)">
+                                            <tr>
+                                                <td>
+            <div style="width:100%;word-break: break-all; word-wrap: break-word;">
+                                                    @Html.DisplayFor(modelItem => item.Solution)
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </td>
+            <td style="width: 10%;">
+
+            </td>
+            <td style="width: 45%;">
+                <h1>Report issue</h1>
+                
+                <div class="row" style="width:100%">
+                    <div class="col-md-4" style="width:100%">
+                        <form asp-action="UserCreateNew">
+                            <div class="form-group">
+                                <label asp-for="IssueTypeID" class="control-label"></label>
+                                <select asp-for="IssueTypeID" class ="form-control" asp-items="ViewBag.IssueTypeID" style="width:50%;"></select>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="Content" class="control-label"></label>
+                                @Html.TextArea("Content", null, new { @class = "form-control"})  
+                                <span asp-validation-for="Content" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <input type="submit" value="Create" class="btn btn-default" />
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </td>
+            
+        </tr>
+               
+    </tbody>
+</table>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

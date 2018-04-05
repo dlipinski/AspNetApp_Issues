@@ -1,0 +1,73 @@
+@model IssueManager.Models.Issue
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h2>Create</h2>
+
+<h4>Issue</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="UserCreateNew">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group" style="display:none">
+                <label asp-for="IsDefined" class="control-label"></label>
+                <input asp-for="IsDefined" class="form-control" />
+                <span asp-validation-for="IsDefined" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="IssueTypeID" class="control-label"></label>
+                <select asp-for="IssueTypeID" class ="form-control" asp-items="ViewBag.IssueTypeID"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="Content" class="control-label"></label>
+                @Html.TextArea("Content", null, new { @class = "form-control"})  
+                <span asp-validation-for="Content" class="text-danger"></span>
+            </div>
+            <div class="form-group" style="display:none">
+                <label asp-for="Solution" class="control-label"></label>
+                <input asp-for="Solution" class="form-control" value="asdasdasdasdasdasd"/>
+                <span asp-validation-for="Solution" class="text-danger"></span>
+            </div>
+            <div class="form-group" style="display:none">
+                <label asp-for="State" class="control-label"></label>
+                <input asp-for="State" class="form-control" value="asdasdasdasdasdasd"/>
+                <span asp-validation-for="State" class="text-danger"></span>
+            </div>
+            <div class="form-group" style="display:none">
+                <label asp-for="Created" class="control-label"></label>
+                <input asp-for="Created" class="form-control" value="asdasdasdasdasdasd"/>
+                <span asp-validation-for="Created" class="text-danger"></span>
+            </div>
+            <div class="form-group" style="display:none">
+                <label asp-for="Solved" class="control-label"></label>
+                <input asp-for="Solved" class="form-control" value="asdasdasdasdasdasd"/>
+                <span asp-validation-for="Solved" class="text-danger"></span>
+            </div>
+            <div class="form-group" style="display:none">
+                <label asp-for="CreatorID" class="control-label"></label>
+                <input asp-for="CreatorID" class="form-control" value="asdasdasdasdasdasd"/>
+                <span asp-validation-for="CreatorID" class="text-danger"></span>
+            </div>
+            <div class="form-group" style="display:none">
+                <label asp-for="SolverID" class="control-label"></label>
+                <input asp-for="SolverID" class="form-control" value="asdasdasdasdasdasd"/>
+                <span asp-validation-for="SolverID" class="text-danger"></span>
+            </div>
+            
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

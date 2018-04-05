@@ -1,0 +1,78 @@
+@model IEnumerable<IssueManager.Models.Issue>
+
+@{
+    ViewData["Title"] = "My Issues";
+}
+<h2>  </h2>
+<table class="table">
+    <thead>
+        <tr>
+         <th>
+                @Html.DisplayNameFor(model => model.IssueType)
+            </th>
+ 
+            <th>
+                @Html.DisplayNameFor(model => model.Content)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Solution)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Created)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Solved)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SolverID)
+            </th>
+           
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+
+        <tr
+        @if (item.State == 0)
+        {
+            @(" style=background:lightyellow; ");
+        }
+        @if (item.State == 1)
+        {
+            @(" style=background:lightblue; ");
+        }
+        @if (item.State == 2)
+        {
+            @(" style=background:lightgreen ; ");
+        }
+        @if (item.State == 3)
+        {
+            @(" style=background:red  ; ");
+        }
+        >
+            <td>
+                @Html.DisplayFor(modelItem => item.IssueType.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Content)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Solution)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Created)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Solved)
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.SolverID)
+            </td>
+           
+            <td>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

@@ -1,0 +1,39 @@
+
+[RAZOR]
+dotnet restore
+dotnet aspnet-codegenerator controller -name MoviesController -m Movie -dc IssueManagerContext --relativeFolderPath Controllers --useDefaultLayout --referenceScriptLibraries 
+dotnet aspnet-codegenerator controller -name ArtistsController -m Artist -dc IssueManagerContext --relativeFolderPath Controllers --useDefaultLayout --referenceScriptLibraries 
+
+
+dotnet aspnet-codegenerator controller -name IssueTypeController -m IssueType -dc IssueManagerContext --relativeFolderPath Controllers --useDefaultLayout --referenceScriptLibraries 
+dotnet aspnet-codegenerator controller -name IssueController -m Issue -dc IssueManagerContext --relativeFolderPath Controllers --useDefaultLayout --referenceScriptLibraries 
+dotnet aspnet-codegenerator controller -name UserIssueController -m UserIssue -dc IssueManagerContext --relativeFolderPath Controllers --useDefaultLayout --referenceScriptLibraries 
+dotnet aspnet-codegenerator controller -name ConfigController -m Config -dc IssueManagerContext --relativeFolderPath Controllers --useDefaultLayout --referenceScriptLibraries 
+dotnet aspnet-codegenerator controller -name UserViewController -m UserView -dc IssueManagerContext --relativeFolderPath Controllers --useDefaultLayout --referenceScriptLibraries 
+
+
+[BAZA]
+dotnet ef migrations add InitialCreate
+dotnet ef database update
+
+
+
+using Microsoft.AspNetCore.Identity;
+using System.Security.Claims;
+
+
+ [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> UserCreateNew([Bind("IssueID,IsDefined,Content,Solution,State,Created,Solved,CreatorID,SolverID,IssueTypeID")] Issue issue)
+        {
+            issue.IsDefined = 0;
+            issue.State = 0;
+            issue.Created = DateTime.Now;
+            issue.Solved = DateTime.Now;
+            issue.CreatorID = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            issue.SolverID = "undefined";
+            _context.Add(issue);
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(Index));
+            
+        }

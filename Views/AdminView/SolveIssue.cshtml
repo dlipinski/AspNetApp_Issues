@@ -1,0 +1,49 @@
+@model IssueManager.Models.IssueUser
+
+@{
+    ViewData["Title"] = "IssueManager Admin - Solve Issue";
+}
+
+<h2>Solve Issue</h2>
+
+<hr />
+<div class="row" style="width:100%;">
+    <div class="col-md-4" style="width:100%;">
+        <form asp-action="SolveIssueF">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Issue.IssueID" />
+
+            <div class="form-group">
+                <label>
+                    Created by @Html.DisplayFor(IssueUser=> IssueUser.NameSurname) ( @Html.DisplayFor(IssueUser=> IssueUser.Issue.Created)   )
+                </label>
+            </div>
+            
+            <div style="width:100%;word-break: break-all; word-wrap: break-word;">
+                <label class="control-label">Issue</label></br>
+                @Html.DisplayFor(IssueUser=> IssueUser.Issue.Content)  
+            </div>
+
+            <div class="form-group">
+            </div>
+            <div class="form-group">
+                <label asp-for="Issue.Solution" class="control-label"></label>
+                @Html.TextArea("Issue.Soultion", null, new { @class = "form-control"})  
+                <span asp-validation-for="Issue.Solution" class="text-danger"></span>
+            </div>
+
+
+            <div class="form-group">
+                <input type="submit" value="Solve" class="btn btn-default" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
