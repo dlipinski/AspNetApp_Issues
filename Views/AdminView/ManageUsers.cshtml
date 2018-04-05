@@ -1,0 +1,57 @@
+@model IssueManager.Models.AdminUsersView
+
+@{
+    ViewData["Title"] = "Defined issues";
+}
+
+<table class="table" style="width:100%;">
+    <thead>
+
+    </thead>
+    <tbody>
+         <tr>
+            <h3></h3>
+            <a asp-area="" asp-controller="AdminView" asp-action="ManageIssueTypes" style="font-size:20px;">Issue Types</a>
+             | 
+            <a asp-area="" asp-controller="AdminView" asp-action="ManageDefinedIssues" style="font-size:20px;">Defined Issues</a>
+            <h1></h1>
+        </tr>
+        <tr>
+            <td style="width: 33%">
+                @foreach (var item in Model.WannaBe) {
+                    <tr>
+                        <td>
+                            (modelItem => item.Name)
+                        </td>
+                    </tr>
+                }
+            </td>
+
+            <td style="width: 33%;">
+                @foreach (var item in Model.Users) {
+                    <tr>
+                        <td>
+                            (modelItem => item.Name)
+                        </td>
+                    </tr>
+                }
+            </td>
+
+            <td style="width: 33%;">
+                @foreach (var item in Model.Admins) {
+                    <tr>
+                        <td>
+                            (modelItem => item.Name)
+                        </td>
+                    </tr>
+                }
+            </td>
+            
+        </tr>
+               
+    </tbody>
+</table>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

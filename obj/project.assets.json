@@ -13122,11 +13122,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/home/dawid/AspNetApp_Movies_Copy/core_sec.csproj",
+      "projectUniqueName": "/home/dawid/AspNetApp_Issues/core_sec.csproj",
       "projectName": "core_sec",
-      "projectPath": "/home/dawid/AspNetApp_Movies_Copy/core_sec.csproj",
+      "projectPath": "/home/dawid/AspNetApp_Issues/core_sec.csproj",
       "packagesPath": "/home/dawid/.nuget/packages/",
-      "outputPath": "/home/dawid/AspNetApp_Movies_Copy/obj/",
+      "outputPath": "/home/dawid/AspNetApp_Issues/obj/",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "/usr/share/dotnet/sdk/NuGetFallbackFolder"

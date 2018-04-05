@@ -146,6 +146,7 @@ namespace IssueManager.Controllers
                 }
                 else
                 {
+                    issueType.isActive=1;
                     _context.Add(issueType);
                 }
                 await _context.SaveChangesAsync();
@@ -225,5 +226,43 @@ namespace IssueManager.Controllers
             return RedirectToAction(nameof(ManageDefinedIssues));
         }
 
+            public async Task<IActionResult> ManageUsers()
+        {
+            var wannaBe =
+                from user in _context.Users
+                join userRole in _context.UserRoles
+                on user.Id equals userRole.RoleId
+                join role in _context.Roles
+                on userRole.RoleId equals role.Id
+                where role.Name != "Admin" && role.Name != "User"
+                select user;
+
+            var users =
+                from user in _context.Users
+                join userRole in _context.UserRoles
+                on user.Id equals userRole.RoleId
+                join role in _context.Roles
+                on userRole.RoleId equals role.Id
+                where role.Name == "User"
+                select user;
+
+            var admins =
+                from user in _context.Users
+                join userRole in _context.UserRoles
+                on user.Id equals userRole.RoleId
+                join role in _context.Roles
+                on userRole.RoleId equals role.Id
+                where role.Name == "Admin"
+                select user;
+
+            AdminUsersView adminUsersView = new AdminUsersView();
+
+            adminUsersView.WannaBe = await wannaBe.ToListAsync();
+            adminUsersView.Users = await users.ToListAsync();
+            adminUsersView.Admins = await admins.ToListAsync();
+
+            return View(nameof(adminUsersView));
+                
+        }
     }
 }

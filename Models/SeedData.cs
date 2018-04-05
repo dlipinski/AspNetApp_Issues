@@ -36,52 +36,25 @@ namespace IssueManager.Models
                context.SaveChanges();
 
             }
-            /*using (var context = new IssueManagerContext(
+            using (var context = new IssueManagerContext(
             serviceProvider.GetRequiredService<DbContextOptions<IssueManagerContext>>()))
             {
 
+                String UserEmailStore = "UserUser123@gmail.com";
+                String UserPassword = "UserUser123";
+                String AdminEmailStore = "AdminAdmin123@gmail.com";
+                String AdminPassword = "AdminAdmin123";
+
+                var _userManager = serviceProvider.GetService<UserManager<IdentityUser>>();
                 
+                var userUser = new ApplicationUser { UserName =UserEmailStore, Email = UserEmailStore };
+                var userResult = await _userManager.CreateAsync(userUser, UserPassword);
 
-                var userManager = serviceProvider.GetService<UserManager<IdentityUser>>();
-                
-
-                    IdentityUser user = new IdentityUser();
-                    user.UserName = "AdminAdmin";
-                    user.Email = "AdminAdmin@gmail.com";
-
-                    IdentityUser user1 = new IdentityUser();
-                    user1.UserName = "UserUser";
-                    user1.Email = "UserUser@gmail.com";
-                    
-                    IdentityResult result = null;
-                    result =  userManager.CreateAsync
-                    (user, user.UserName).Result;
-            
-                    if (result.Succeeded)
-                    {
-                        userManager.AddToRoleAsync(user,
-                        "AdminRole").Wait();
-                    }
-                    
-                    IdentityResult result1 = null;
-                    result1 =  userManager.CreateAsync
-                    (user1, user1.UserName).Result;
-
-                    if (result1.Succeeded)
-                    {
-                        userManager.AddToRoleAsync(user1,
-                                            "UserRole").Wait();
-                    }
-                    
-                    var user_admin = await userManager.FindByNameAsync("AdminAdmin123@gmail.com");
-                    var user_User = await userManager.FindByNameAsync("UserUser123@gmail.com");
-                    await userManager.AddToRoleAsync(user_admin, "AdminRole");
-                    await userManager.AddToRoleAsync(user_User, "UserRole");
-                
-                    context.SaveChanges();
+                var adminUser = new ApplicationUser { UserName =AdminEmailStore, Email = AdminEmailStore };
+                var adminAesult = await _userManager.CreateAsync(adminUser, AdminPassword);
                 
             }
-            */
+            
             using (var context = new IssueManagerContext(
                 serviceProvider.GetRequiredService<DbContextOptions<IssueManagerContext>>()))
             {

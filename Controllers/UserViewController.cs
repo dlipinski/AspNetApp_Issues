@@ -29,8 +29,9 @@ namespace IssueManager.Controllers
                 from m in _context.Issue.Include(m =>m.IssueType)
                 where m.IsDefined == 1
                 select m;
+            
             userView.Issues = await definedIssues.ToListAsync();   
-            ViewData["IssueTypeID"] = new SelectList(_context.IssueType.OrderBy(it => it.Name), "IssueTypeID", "Name", userView.IssueTypeID);         
+            ViewData["IssueTypeID"] = new SelectList(_context.IssueType.OrderBy(it => it.Name).Where(itia => itia.isActive == 1), "IssueTypeID", "Name", userView.IssueTypeID);         
             return View(userView);
         }
 
