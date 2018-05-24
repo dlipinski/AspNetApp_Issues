@@ -9,7 +9,7 @@
 <hr />
 <div class="row" style="width:100%;">
     <div class="col-md-4" style="width:100%;">
-        <form asp-action="SolveIssueF">
+        <form asp-action="SolveIssueF" method="post"  role="form">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="Issue.IssueID" />
 
@@ -28,7 +28,7 @@
             </div>
             <div class="form-group">
                 <label asp-for="Issue.Solution" class="control-label"></label>
-                @Html.TextArea("Issue.Soultion", null, new { @class = "form-control"})  
+                @Html.TextArea("Issue.Solution", null, new { @class = "form-control"})  
                 <span asp-validation-for="Issue.Solution" class="text-danger"></span>
             </div>
 

@@ -19,37 +19,28 @@
     
         <tr>
         <td>
-            <div class="btn btn-default" style="width:100%;">
-                <table class="table" style="background:none;text-align:left; margin-bottom:5px;">
-                    <thead>
-                        <th>
-                            <a asp-action="GetIssue" asp-route-id="@item.Issue.IssueID">Get Issue!</a> 
-                            <h4>@Html.DisplayFor(modelItem => item.Issue.Created)</h4>
-                            
-                            
-                            @Html.DisplayFor(modelItem => item.Issue.IssueType.Name)
-                            <br>
-                            
-                             @Html.DisplayFor(modelItem => item.NameSurname)
-                        </th>
-                        
-                    </thead>
-                    <tbody>
+            <a asp-action="SolveIssue" asp-route-id="@item.Issue.IssueID" title="Solve issue">
+                <div class="btn btn-default" style="width:100%;">
+                    <table class="table" style="background:none;text-align:left; margin-bottom:5px;">
+                        <thead>
                         <tr>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Issue.Content)
-                            </td>
+                            <th>
+                                @Html.DisplayFor(modelItem => item.Issue.IssueType.Name)
+                                ,&nbsp;
+                                @Html.DisplayFor(modelItem => item.Issue.Created)
+                            </th>
                         </tr>
-                    </tbody>
-                    <tbody>
-                        <tr>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Issue.Content)
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Issue.Content)
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </a>
             </td>
         </tr>
     

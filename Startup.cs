@@ -78,11 +78,11 @@ namespace core_sec
             services.AddTransient<IEmailSender, EmailSender>();
             services.AddAuthorization(options =>
             {
-                options.AddPolicy(name: "Admin", configurePolicy: policy => policy.RequireRole("AdminRole"));
+                options.AddPolicy(name: "Admin", configurePolicy: policy => policy.RequireRole("Admin"));
             });
             services.AddAuthorization(options =>
             {
-                options.AddPolicy(name: "User", configurePolicy: policy => policy.RequireRole("AdminRole","UserRole"));
+                options.AddPolicy(name: "User", configurePolicy: policy => policy.RequireRole("Admin","User"));
             });
             
            
@@ -111,7 +111,7 @@ namespace core_sec
             {
                 routes.MapRoute(
                     name: "default",
-                    template: "{controller=Issue}/{action=Index}/{id?}");
+                    template: "{controller=Config}/{action=Index}/{id?}");
             });
         }
        

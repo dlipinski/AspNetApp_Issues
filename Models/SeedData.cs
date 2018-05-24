@@ -22,20 +22,21 @@ namespace IssueManager.Models
 
                 IdentityResult IR = null;
 
-                if (!await roleManager.RoleExistsAsync("AdminRole"))
+                if (!await roleManager.RoleExistsAsync("Admin"))
                 {
-                    IR = await roleManager.CreateAsync(new IdentityRole("AdminRole"));
+                    IR = await roleManager.CreateAsync(new IdentityRole("Admin"));
                 }
 
                
 
-                if (!await roleManager.RoleExistsAsync("UserRole"))
+                if (!await roleManager.RoleExistsAsync("User"))
                 {
-                    IR = await roleManager.CreateAsync(new IdentityRole("UserRole"));
+                    IR = await roleManager.CreateAsync(new IdentityRole("User"));
                 }           
                context.SaveChanges();
 
             }
+            /*
             using (var context = new IssueManagerContext(
             serviceProvider.GetRequiredService<DbContextOptions<IssueManagerContext>>()))
             {
@@ -53,7 +54,7 @@ namespace IssueManager.Models
                 var adminUser = new ApplicationUser { UserName =AdminEmailStore, Email = AdminEmailStore };
                 var adminAesult = await _userManager.CreateAsync(adminUser, AdminPassword);
                 
-            }
+            }*/
             
             using (var context = new IssueManagerContext(
                 serviceProvider.GetRequiredService<DbContextOptions<IssueManagerContext>>()))
@@ -88,7 +89,7 @@ namespace IssueManager.Models
                 serviceProvider.GetRequiredService<DbContextOptions<IssueManagerContext>>()))
             {
                 // Look for any movies.
-                if (context.IssueType.Any())
+                if (await context.IssueType.AnyAsync())
                 {
                     return;   // DB has been seeded
                 }

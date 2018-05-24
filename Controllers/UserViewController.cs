@@ -54,14 +54,20 @@ namespace IssueManager.Controllers
         public async Task<IActionResult> MyIssues()
         {
             var myId = User.FindFirstValue(ClaimTypes.NameIdentifier);
-
-            var myIssues =
-                from issue in _context.Issue.Include(m =>m.IssueType)
-                where issue.CreatorID == myId
+            var issueUser =
+                from issue in _context.Issue.Include(i => i.IssueType)
+                join  user in _context.ApplicationUser
+                on issue.SolverID equals user.Id
+                into iu
+                from issueuser in iu.DefaultIfEmpty()
+                where issue.CreatorID == myId && issue.IsDefined == 0
                 orderby issue.Created descending
-                select issue;
-            
-            return View(await myIssues.ToListAsync());
+                select new IssueUser(
+                    issueuser.UserName,
+                    issue
+                );  
+
+            return View(await issueUser.ToListAsync());
         }
     }
 }

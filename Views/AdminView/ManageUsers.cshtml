@@ -1,7 +1,7 @@
 @model IssueManager.Models.AdminUsersView
 
 @{
-    ViewData["Title"] = "Defined issues";
+    ViewData["Title"] = "Manage users";
 }
 
 <table class="table" style="width:100%;">
@@ -14,39 +14,86 @@
             <a asp-area="" asp-controller="AdminView" asp-action="ManageIssueTypes" style="font-size:20px;">Issue Types</a>
              | 
             <a asp-area="" asp-controller="AdminView" asp-action="ManageDefinedIssues" style="font-size:20px;">Defined Issues</a>
+             | 
+            <a asp-area="" asp-controller="AdminView" asp-action="ManageUsers" style="font-size:20px;">Users</a>
             <h1></h1>
         </tr>
         <tr>
-            <td style="width: 33%">
-                @foreach (var item in Model.WannaBe) {
-                    <tr>
-                        <td>
-                            (modelItem => item.Name)
-                        </td>
-                    </tr>
-                }
-            </td>
+            <td style = "width:30%;">
+                <table style="width:100%;">
+                    <thead>
+                        <tr>
+                            <th>WannaBe</th>
+                            
+                        </tr>
+                    </thead>
+                    <tbody>
+                            @foreach (var item in Model.WannaBe) {
+                                <tr>
+                                    <td style="width:70%;">
+                                        @Html.DisplayFor(modelItem => item.UserName)
+                                    
+                                    </td>
+                                     <td style="width:35%;text-align:right;">
+                                        <a asp-action="SetWannaBeUser" asp-route-id="@item.Id" title="Set user"><i class="fas fa-user-plus" style="font-size:20px;"></i></a>
+                                        &nbsp;&nbsp;
+                                        <a asp-action="DeleteWannaBe" asp-route-id="@item.Id" title="Decline "><i class="fas fa-times" style="font-size:20px;"></i></a>
 
-            <td style="width: 33%;">
-                @foreach (var item in Model.Users) {
-                    <tr>
-                        <td>
-                            (modelItem => item.Name)
-                        </td>
-                    </tr>
-                }
+                                    </td>
+                                </tr>
+                            }
+                    </tbody>
+                </table>
             </td>
-
-            <td style="width: 33%;">
-                @foreach (var item in Model.Admins) {
-                    <tr>
-                        <td>
-                            (modelItem => item.Name)
-                        </td>
-                    </tr>
-                }
+            <td style="width:3%;"></td>
+            <td style = "width:30%;">
+                <table style="width:100%;">
+                    <thead>
+                        <tr>
+                            <th>Users</th>
+                            
+                        </tr>
+                    </thead>
+                    <tbody>
+                            @foreach (var item in Model.Users) {
+                                <tr>
+                                    <td style="width:70%;">
+                                        @Html.DisplayFor(modelItem => item.UserName)
+                                    </td>
+                                     <td style="width:30%;text-align:right;">
+                                    <a asp-action="SetUserAdmin" asp-route-id="@item.Id" title="Set admin"><i class="fas fa-arrow-circle-up" style="font-size:20px;"></i></a>
+                                    &nbsp;&nbsp;
+                                    <a asp-action="DeleteUser" asp-route-id="@item.Id" title="Delete user"><i class="fas fa-user-times" style="font-size:20px;"></i></a>
+                                    </td>
+                                </tr>
+                            }
+                    </tbody>
+                </table>
             </td>
-            
+            <td style="width:3%;"></td>
+            <td style = "width:30%;">
+                <table style="width:100%;">
+                    <thead>
+                        <tr>
+                            <th>Admins</th>
+                            
+                        </tr>
+                    </thead>
+                    <tbody>
+                            @foreach (var item in Model.Admins) {
+                                <tr>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.UserName)
+                                    </td>
+                                    <td style="width:30%;text-align:right;">
+                                    <a asp-action="SetAdminUser" asp-route-id="@item.Id" title="Set user"><i class="fas fa-arrow-circle-down" style="font-size:20px;"></i></a>
+                                    
+                                    </td>
+                                </tr>
+                            }
+                    </tbody>
+                </table>
+            </td>
         </tr>
                
     </tbody>

@@ -13,6 +13,8 @@ using Microsoft.Extensions.Options;
 using core_sec.Models;
 using core_sec.Models.AccountViewModels;
 using core_sec.Services;
+using IssueManager.Models;
+
 
 namespace core_sec.Controllers
 {
@@ -459,8 +461,9 @@ namespace core_sec.Controllers
             }
         }
 
-
+        
         #endregion
 
+  
     }
 }

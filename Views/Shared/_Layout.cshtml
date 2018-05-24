@@ -12,7 +12,7 @@
     }else{
         <title>@ViewData["Title"] - IssueManager</title>
     }
-<script defer src="https://use.fontawesome.com/releases/v5.0.9/js/all.js" integrity="sha384-8iPTk2s/jMVj81dnzb/iFR2sdA7u06vHJyyLlAd4snFpCl/SnyUjRrbdJsw1pGIl" crossorigin="anonymous"></script>    <environment include="Development">
+        <script defer src="https://use.fontawesome.com/releases/v5.0.9/js/all.js" integrity="sha384-8iPTk2s/jMVj81dnzb/iFR2sdA7u06vHJyyLlAd4snFpCl/SnyUjRrbdJsw1pGIl" crossorigin="anonymous"></script>    <environment include="Development">
         <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
         <link rel="stylesheet" href="~/css/site.css" />
         
@@ -35,12 +35,10 @@
                     <span class="icon-bar"></span>
                 </button>
                 
-                    <a asp-area="" asp-controller="UserView" asp-action="Index" class="navbar-brand">IM(user)</a>
+                    <a asp-area="" asp-controller="UserView" asp-action="Index" class="navbar-brand"><i class="fas fa-bolt"></i>IM(user)</a>
                     
                     <a asp-area="" asp-controller="UserView" asp-action="MyIssues" class="navbar-brand" style="font-size: 15px;">My issues</a>
-                    <a asp-area="" asp-controller="AdminView" asp-action="Index" class="navbar-brand">IM(admin)</a>
-                    <a asp-area="" asp-controller="AdminView" asp-action="ManageIssueTypes" class="navbar-brand">manage issue types</a>
-                
+                    <a asp-area="" asp-controller="AdminView" asp-action="Index" class="navbar-brand"><i class="fas fa-bolt"></i>IM(admin)</a>
                 
             </div>
             <div class="navbar-collapse collapse">

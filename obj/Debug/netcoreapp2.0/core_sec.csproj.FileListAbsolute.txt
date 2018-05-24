@@ -45,3 +45,5 @@
 /home/dawid/AspNetApp_Issues/obj/Debug/netcoreapp2.0/core_sec.AssemblyInfo.cs
 /home/dawid/AspNetApp_Issues/obj/Debug/netcoreapp2.0/core_sec.dll
 /home/dawid/AspNetApp_Issues/obj/Debug/netcoreapp2.0/core_sec.pdb
+/home/dawid/AspNetApp_Issues/bin/Debug/netcoreapp2.0/app.db
+/home/dawid/AspNetApp_Issues/obj/Debug/netcoreapp2.0/core_sec.csprojResolveAssemblyReference.cache

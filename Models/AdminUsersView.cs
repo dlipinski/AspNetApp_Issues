@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using IssueManager.Models;
 using Microsoft.AspNetCore.Identity;
 using System.Threading.Tasks;
+using core_sec.Models;
 
 namespace IssueManager.Models
 {

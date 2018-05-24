@@ -9,11 +9,13 @@
 
     </thead>
     <tbody>
-        <tr>
+         <tr>
             <h3></h3>
             <a asp-area="" asp-controller="AdminView" asp-action="ManageIssueTypes" style="font-size:20px;">Issue Types</a>
              | 
             <a asp-area="" asp-controller="AdminView" asp-action="ManageDefinedIssues" style="font-size:20px;">Defined Issues</a>
+             | 
+            <a asp-area="" asp-controller="AdminView" asp-action="ManageUsers" style="font-size:20px;">Users</a>
             <h1></h1>
         </tr>
         <tr>
@@ -67,19 +69,23 @@
                                 <div id ="@item.IssueID normal" class="btn btn-default" style="width: 100%; text-align: left;" onclick="appendSolution(@Html.DisplayFor(modelItem => item.IssueID))">
                                     <table class="table" style="background:none; margin:0px;" id="instab">
                                         <thead>
-                                                <th style="width:90%;">
+                                            <tr>
+                                                <td style="width:90%;">
+                                                <b>
                                                     @Html.DisplayFor(modelItem => item.Content)
-                                                </th>
+                                                </b>
+                                                </td>
                                                 <th style="text-align:center;">
-                                                    <a onclick="editDefinedSolution( @item.IssueID );">
-                                                        <i class="fas fa-pencil-alt" style="font-size:20px;"></i>
+                                                    <a onclick="editDefinedSolution( @item.IssueID );" title="Edit issue">
+                                                        <i class="fas fa-pencil-alt" style="font-size:20px;" ></i>
                                                     </a> 
                                                 </th>
                                                 <th>
-                                                    <a asp-action="DeleteDefinedIssue" asp-route-id="@item.IssueID">
+                                                    <a asp-action="DeleteDefinedIssue" asp-route-id="@item.IssueID" title="Delete issue">
                                                         <i style="font-size:20px;" class="fas fa-trash-alt"></i>
                                                     </a> 
                                                 </th>
+                                            </tr>
                                         </thead>
                                         <tbody style="display:none;" id="@Html.DisplayFor(modelItem => item.IssueID)">
                                             <tr>
@@ -115,12 +121,12 @@
                                                     <td style="width:80%;">
                                                     </td>
                                                     <td>
-                                                            <a onclick="submitEdit( @item.IssueID );">
+                                                            <a onclick="submitEdit( @item.IssueID );" title="Accept">
                                                                 <i class="fas fa-check" style="font-size:20px;"></i>
                                                             </a>
                                                     </td>
                                                     <td>
-                                                        <a onclick="closeEditDefinedSolution( @item.IssueID );">
+                                                        <a onclick="closeEditDefinedSolution( @item.IssueID );" title="Decline">
                                                                 <i class="fas fa-times" style="font-size:20px;"></i>
                                                         </a>
                                                     </td> 
@@ -139,12 +145,14 @@
             <td style="width: 10%;">
             </td>
             <td style="width: 45%;">
-                <h1>New defined issue</h1>
+                <h1>Create new defined issue</h1>
+                <h5>Defined issue is an often occuring problem, to relieve admins work.</h5>
+                <h1></h1>
                 <div class="row" style="width:100%">
                     <div class="col-md-4" style="width:100%">
                         <form asp-action="AdminCreateNewDefinedIssue">
                             <div class="form-group">
-                                <label asp-for="IssueTypeID" class="control-label"></label>
+                                <label asp-for="IssueTypeID" class="control-label">Choose issue type</label>
                                 <select asp-for="IssueTypeID" class ="form-control" asp-items="ViewBag.IssueTypeID" style="width:50%;"></select>
                             </div>
                             <div class="form-group">

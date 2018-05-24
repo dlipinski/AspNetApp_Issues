@@ -1,4 +1,4 @@
-@model IEnumerable<IssueManager.Models.Issue>
+@model IEnumerable<IssueManager.Models.IssueUser>
 
 @{
     ViewData["Title"] = "My Issues";
@@ -7,72 +7,69 @@
 <table class="table">
     <thead>
         <tr>
-         <th>
-                @Html.DisplayNameFor(model => model.IssueType)
-            </th>
- 
-            <th>
-                @Html.DisplayNameFor(model => model.Content)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Solution)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Created)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Solved)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.SolverID)
-            </th>
-           
+
         </tr>
     </thead>
     <tbody>
 @foreach (var item in Model) {
-
-        <tr
-        @if (item.State == 0)
-        {
-            @(" style=background:lightyellow; ");
-        }
-        @if (item.State == 1)
-        {
-            @(" style=background:lightblue; ");
-        }
-        @if (item.State == 2)
-        {
-            @(" style=background:lightgreen ; ");
-        }
-        @if (item.State == 3)
-        {
-            @(" style=background:red  ; ");
-        }
-        >
-            <td>
-                @Html.DisplayFor(modelItem => item.IssueType.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Content)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Solution)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Created)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Solved)
-            </td>
-
-            <td>
-                @Html.DisplayFor(modelItem => item.SolverID)
-            </td>
-           
-            <td>
-            </td>
-        </tr>
-}
+                            <tr>
+                                <td>
+                                    <div class="btn btn-default" style="width: 100%; text-align: left; background:
+                                    @switch (@item.Issue.State)
+                                    {
+                                        case 0:
+                                            <text>lightyellow</text>
+                                            break;
+                                        case 1:
+                                            <text>lightblue</text>
+                                            break;
+                                        case 2:
+                                            <text>lightgreen</text>
+                                            break;
+                                        case 3:
+                                            <text>lightred</text>
+                                            break;
+                                    }
+                                    ;" onclick="appendSolution(@Html.DisplayFor(modelItem => item.Issue.IssueID))">
+                                        <table class="table" style="background:none; margin:0px;" id="instab">
+                                            <thead>
+                                                <tr>
+                                                    <b>
+                                                        <u>Created</u>:
+                                                        @Html.DisplayFor(modelItem => item.Issue.Created)
+                                                        &nbsp;&nbsp;
+                                                        @if (@item.Issue.State > 1)
+                                                            {
+                                                                <text>
+                                                                <u>Solved</u>:
+                                                                @Html.DisplayFor(modelItem => item.Issue.Solved)
+                                                                </text>
+                                                            }
+                                                    </b>
+                                                </tr>
+                                                <h5></h5>
+                                                <tr>
+                                                    @Html.DisplayFor(modelItem => item.Issue.Content)
+                                                </tr>
+                                            </thead>
+                                            @if (@item.Issue.Solution != "undefined")
+                                            {
+                                                <text>
+                                                    <tbody style="display:none;" id="@Html.DisplayFor(modelItem => item.Issue.IssueID)">
+                                                        <tr>
+                                                            <td>
+                                                                <div style="width:100%;word-break: break-all; word-wrap: break-word;">
+                                                                    @Html.DisplayFor(modelItem => item.Issue.Solution)
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </text>
+                                            }
+                                        </table>
+                                    </div>
+                                </td>
+                            </tr>
+                        }
     </tbody>
 </table>

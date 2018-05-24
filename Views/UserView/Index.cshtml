@@ -29,34 +29,22 @@
                         @foreach (var item in Model.Issues) {
                             <tr>
                                 <td>
-                                <script>
-                                
-                                    function appendSolution(id) {
-                                        const display = document.getElementById(id).style.display;
-                                        if(display == 'none'){ 
-                                            document.getElementById(id).style.display='block';
-                                            
-                                        } else {
-                                            document.getElementById(id).style.display='none';
-                                        }
-                                    }
-                                </script>
-                                <div class="btn btn-default" style="width: 100%; text-align: left;" onclick="appendSolution(@Html.DisplayFor(modelItem => item.IssueID))">
-                                    <table class="table" style="background:none; margin:0px;" id="instab">
-                                        <thead>
-                                                @Html.DisplayFor(modelItem => item.Content)
-                                        </thead>
-                                        <tbody style="display:none;" id="@Html.DisplayFor(modelItem => item.IssueID)">
-                                            <tr>
-                                                <td>
-            <div style="width:100%;word-break: break-all; word-wrap: break-word;">
-                                                    @Html.DisplayFor(modelItem => item.Solution)
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
+                                    <div class="btn btn-default" style="width: 100%; text-align: left;" onclick="appendSolution(@Html.DisplayFor(modelItem => item.IssueID))">
+                                        <table class="table" style="background:none; margin:0px;" id="instab">
+                                            <thead>
+                                                    @Html.DisplayFor(modelItem => item.Content)
+                                            </thead>
+                                            <tbody style="display:none;" id="@Html.DisplayFor(modelItem => item.IssueID)">
+                                                <tr>
+                                                    <td>
+                                                        <div style="width:100%;word-break: break-all; word-wrap: break-word;">
+                                                            @Html.DisplayFor(modelItem => item.Solution)
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
                                 </td>
                             </tr>
                         }
